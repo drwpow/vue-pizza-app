@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <App>
+    <PizzaBuilder
+      :sauce="sauce"
+      :size="size"
+      :toppings="toppings"
+      :onChangeSauce="changeSauce"
+      :onChangeSize="changeSize"
+      :onChangeToppings="changeToppings"
+    />
+  </App>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import styled from 'vue-styled-components';
+import PizzaBuilder from './components/PizzaBuilder';
+import { font } from './lib/theme';
+
+const App = styled.div`
+  font-family: ${font.sans};
+  font-size: 16px;
+`;
 
 export default {
-  name: 'app',
+  data() {
+    return {
+      sauce: 'redsauce',
+      size: 14,
+      toppings: [],
+    };
+  },
+  methods: {
+    changeSauce(newVal) {
+      this.sauce = newVal;
+    },
+    changeSize(newVal) {
+      this.size = newVal;
+    },
+    changeToppings(newVal) {
+      this.toppings = newVal;
+    },
+  },
   components: {
-    HelloWorld
-  }
-}
+    App,
+    PizzaBuilder,
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
